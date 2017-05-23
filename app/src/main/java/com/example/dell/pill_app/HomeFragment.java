@@ -1,7 +1,9 @@
 package com.example.dell.pill_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,7 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 
-
+    private FloatingActionButton fab;
     private View mContent;
 
     public static android.support.v4.app.Fragment newInstance() {
@@ -27,7 +29,16 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home,container,false);
+       View v=inflater.inflate(R.layout.fragment_home,container,false);
+        fab=(FloatingActionButton) v.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),AddPill.class);
+                startActivity(intent);
+            }
+        });
+        return  v;
     }
 
     @Override
