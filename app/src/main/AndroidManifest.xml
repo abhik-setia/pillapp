@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".AddPill">
         </activity>
+        <activity android:name=".Notification">
+        </activity>
     </application>
 
 </manifest>
