@@ -1,6 +1,5 @@
 package com.example.dell.pill_app;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -34,33 +33,25 @@ public class MainActivity extends AppCompatActivity {
         // init corresponding fragment
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                frag = MenuFragment.newInstance(getString(R.string.title_home),
-                        getResources().getColor(R.color.colorHome));
+                frag = HomeFragment.newInstance();
                 break;
             case R.id.navigation_dashboard:
-                frag = MenuFragment.newInstance(getString(R.string.title_dashboard),
-                        getResources().getColor(R.color.colordash));
+                frag = DashFragment.newInstance();
                 break;
             case R.id.navigation_notifications:
-                frag = MenuFragment.newInstance(getString(R.string.title_notifications),
-                        getResources().getColor(R.color.colornoti));
+                frag = NotiFragment.newInstance();
                 break;
         }
 
-        // update selected item
-        mSelectedItem = item.getItemId();
 
-        // uncheck the other items.
-        for (int i = 0; i< navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            menuItem.setChecked(menuItem.getItemId() == item.getItemId());
-        }
 
         updateToolbarText(item.getTitle());
 
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.container, frag, frag.getTag());
+            //ft.add(R.id.container, frag, frag.getTag());
+
+            ft.replace(R.id.container, frag, frag.getTag());
             ft.commit();
         }
     }
@@ -89,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         //mTextMessage = (TextView) findViewById(R.id.message);
          navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        selectFragment(navigation.getMenu().getItem(0));
     }
 
 }
